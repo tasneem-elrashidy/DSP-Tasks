@@ -1,0 +1,37 @@
+# import streamlit as st
+# import numpy as np
+# import matplotlib as plt
+# import signalOperations
+# import pre
+
+# def add():
+
+#      pdf1 = st.file_uploader('upload signal 1', type="txt",key="signal1")
+#     # if pdf1 is not None:
+#     #     st.session_state['pdf1'] = pdf1
+#      pdf2 = st.file_uploader('upload signal 2', type="txt", key="signal2")
+#     # if pdf2 is not None:
+#     #     st.session_state['pdf2'] = pdf2
+
+#     # if pdf1 is not None:
+#     #  st.session_state['pdf1'] = pdf1
+#     # if pdf2 is not None:
+#     #  st.session_state['pdf2'] = pdf2
+#     # if 'pdf1' in st.session_state and 'pdf2' in st.session_state:
+#      signal1x,signal1y=pre.readFile(st.session_state['pdf1'])
+#      signal2x,signal2y=pre.readFile(st.session_state['pdf2'])
+#      addition=signalOperations.oprations.add(signal1x,signal1y,signal2x,signal2y)
+#      fig1, ax1 = plt.subplots()
+#      ax1.plot(signal1x, signal1y, label='Signal 1', linestyle='--')
+#      ax1.plot(signal2x, signal2y, label='Signal 2', linestyle='--')
+#      ax1.plot(signal1x, addition, label='Added Signal', color='red')
+#      ax1.set_title("Continuous Signals")
+#      ax1.legend()
+#      st.pyplot(fig1)
+
+
+
+
+
+# las version 
+
