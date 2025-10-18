@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
-import signalOperations
-import GenerateSignals
+# import signalOperations
+# import GenerateSignals
 
 # In[ ]:
 
@@ -64,8 +64,8 @@ def SinCosSignalSamplesAreEqual(user_choice,file_name,samples):
             return
     print(user_choice +" Test case passed successfully")
 
-x=GenerateSignals.SignalGenerator.generate("sin",3,360,720,1.96349540849362)
-SinCosSignalSamplesAreEqual("sin","Sin_Cos\SinOutput.txt",x)
+# x=GenerateSignals.SignalGenerator.generate("sin",3,360,720,1.96349540849362)
+# SinCosSignalSamplesAreEqual("sin","Sin_Cos\SinOutput.txt",x)
 # x=GenerateSignals.SignalGenerator.generate("cos",3,200,500,2.35619449019235)
 # SinCosSignalSamplesAreEqual("cos","Sin_Cos\CosOutput.txt",x)
 
@@ -74,9 +74,9 @@ SinCosSignalSamplesAreEqual("sin","Sin_Cos\SinOutput.txt",x)
 
 def SubSignalSamplesAreEqual(userFirstSignal,userSecondSignal,Your_indices,Your_samples):
     if(userFirstSignal=='Signal1.txt' and userSecondSignal=='Signal2.txt'):
-        file_name="output_Math_operation_Files\signal1-signal2.txt" # write here path of signal1-signal2
+        file_name="Task2\Signal1+signal2.txt" # write here path of signal1-signal2
     elif(userFirstSignal=='Signal1.txt' and userSecondSignal=='Signal3.txt'):
-        file_name="output_Math_operation_Files\signal1-signal3.txt" # write here path of signal1-signal3
+        file_name="Task2\signal1+signal3.txt" # write here path of signal1-signal3
         
     expected_indices,expected_samples=ReadSignalFile(file_name)   
     

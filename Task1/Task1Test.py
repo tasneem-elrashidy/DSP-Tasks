@@ -2,7 +2,6 @@
 # coding: utf-8
 
 # In[ ]:
-import signalOperations
 
 
 def ReadSignalFile(file_name):
@@ -33,15 +32,15 @@ def ReadSignalFile(file_name):
 
 def AddSignalSamplesAreEqual(userFirstSignal,userSecondSignal,Your_indices,Your_samples):
     if(userFirstSignal=='Signal1.txt' and userSecondSignal=='Signal2.txt'):
-        file_name="Signal1+signal2.txt" # write here path of signal1+signal2
+        file_name="Task1\output\Signal1+signal2.txt" # write here path of signal1+signal2
     elif(userFirstSignal=='Signal1.txt' and userSecondSignal=='Signal3.txt'):
-        file_name="signal1+signal3.txt" # write here path of signal1+signal3
+        file_name="Task1\output\signal1+signal3.txt" # write here path of signal1+signal3
     expected_indices,expected_samples=ReadSignalFile(file_name)          
     if (len(expected_samples)!=len(Your_samples)) and (len(expected_indices)!=len(Your_indices)):
         print("Addition Test case failed, your signal have different length from the expected one")
         return
     for i in range(len(Your_indices)):
-        if(int(Your_indices[i])!=expected_indices[i]):
+        if(Your_indices[i]!=expected_indices[i]):
             print("Addition Test case failed, your signal have different indicies from the expected one") 
             return
     for i in range(len(expected_samples)):
@@ -52,38 +51,32 @@ def AddSignalSamplesAreEqual(userFirstSignal,userSecondSignal,Your_indices,Your_
             return
     print("Addition Test case passed successfully")
 
-# idx,sapmles=signalOperations.oprations.add("Signal1.txt","Signal2.txt")
-# AddSignalSamplesAreEqual("Signal1.txt","Signal2.txt",idx,sapmles)
-
 
 # In[ ]:
 
 
 def MultiplySignalByConst(User_Const,Your_indices,Your_samples):
     if(User_Const==5):
-        file_name="MultiplySignalByConstant-Signal1 - by 5.txt" # write here path of MultiplySignalByConstant-Signal1 - by 5.txt
+        file_name="Task1\output\MultiplySignalByConstant-Signal1 - by 5.txt" # write here path of MultiplySignalByConstant-Signal1 - by 5.txt
     elif(User_Const==10):
-        file_name="MultiplySignalByConstant-signal2 - by 10.txt" # write here path of MultiplySignalByConstant-Signal2 - by 10.txt
+        file_name="Task1\output\MultiplySignalByConstant-signal2 - by 10.txt" # write here path of MultiplySignalByConstant-Signal2 - by 10.txt
         
     expected_indices,expected_samples=ReadSignalFile(file_name)      
     if (len(expected_samples)!=len(Your_samples)) and (len(expected_indices)!=len(Your_indices)):
-        print(f"Multiply by {User_Const} Test case failed, your signal have different length from the expected one")
+        print("Multiply by "+User_Const.str()+ " Test case failed, your signal have different length from the expected one")
         return
     for i in range(len(Your_indices)):
-        if(int(Your_indices[i])!=expected_indices[i]):
-            print(f"Multiply by {User_Const} Test case failed, your signal have different indicies from the expected one") 
+        if(Your_indices[i]!=expected_indices[i]):
+            print("Multiply by "+User_Const.str()+" Test case failed, your signal have different indicies from the expected one") 
             return
     for i in range(len(expected_samples)):
         if abs(Your_samples[i] - expected_samples[i]) < 0.01:
             continue
         else:
-            print(f"Multiply by {User_Const}  Test case failed, your signal have different values from the expected one") 
+            print("Multiply by "+User_Const.str()+" Test case failed, your signal have different values from the expected one") 
             return
-    print(f"Multiply by {User_Const}  Test case passed successfully")
-idx,samples=signalOperations.oprations.muli("Signal1.txt",5)
-MultiplySignalByConst(5,idx,samples)
-# idx,samples=signalOperations.oprations.muli("Signal2.txt",10)
-# MultiplySignalByConst(10,idx,samples)
+    print("Multiply by "+User_Const.str()+" Test case passed successfully")
+
 
 # In[ ]:
 
@@ -126,5 +119,4 @@ def SignalSamplesAreEqual(TaskName,output_file_name,Your_indices,Your_samples):
             print(TaskName+" Test case failed, your signal have different values from the expected one") 
             return
     print(TaskName+" Test case passed successfully")
-
 
