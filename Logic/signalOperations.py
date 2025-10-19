@@ -1,5 +1,6 @@
 import numpy as np
-import pre
+from Logic import pre
+from Task2 import Task2Test
 
 
 class oprations:
@@ -65,9 +66,6 @@ class oprations:
         return indx,output
     # out=acc(val1)
     # print(out)
-    
-    
-        
 
     def normZeroOne(sig1):
         indx,val = pre.readFile(sig1)

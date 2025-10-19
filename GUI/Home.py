@@ -1,6 +1,6 @@
 import streamlit as st
-import matplotlib
-import signalOperations
-import functions 
-st.write("welcome to signal processing ")
-st.button("Add Signals", on_click=functions.add)
+import matplotlib as plt
+
+st.title("Digital Signal Processing Project")
+st.header("by")
+st.header("Tasneem Mohamed & Sondos Khalid" )

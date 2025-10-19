@@ -14,5 +14,5 @@ class SignalGenerator:
         else:
             print("Signal type must be sin or cos!!")
             
-        return x
+        return n,x
     

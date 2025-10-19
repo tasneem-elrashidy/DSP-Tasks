@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-# import signalOperations
-# import GenerateSignals
+from Logic import GenerateSignals
 
 # In[ ]:
 
@@ -65,7 +64,7 @@ def SinCosSignalSamplesAreEqual(user_choice,file_name,samples):
     print(user_choice +" Test case passed successfully")
 
 # x=GenerateSignals.SignalGenerator.generate("sin",3,360,720,1.96349540849362)
-# SinCosSignalSamplesAreEqual("sin","Sin_Cos\SinOutput.txt",x)
+# SinCosSignalSamplesAreEqual("sin","Task2\Sin_Cos\SinOutput.txt",x)
 # x=GenerateSignals.SignalGenerator.generate("cos",3,200,500,2.35619449019235)
 # SinCosSignalSamplesAreEqual("cos","Sin_Cos\CosOutput.txt",x)
 
