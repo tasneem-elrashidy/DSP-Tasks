@@ -93,57 +93,48 @@ class oprations:
         return indx,out
     # out=normOneToOne(val1)
     # print(out)
+    def quantization(self, signal, bits=None, levels=None):
+        if bits is None and levels is None:
+            raise ValueError("You must specify either 'bits' or 'levels'.")
 
-    def bitquantization(signal,bits):
-        numSamples,index,signalVal = pre.quantizationFile(signal)
-        Quantized=[]
-        encodedval=[]
-        signal_array = np.array(signalVal)
-        converyed_signals= signal_array.astype(float)
-        
-        minval=min(converyed_signals)
-        maxval=max(converyed_signals)
-        rang=maxval-minval
-        levels=2**bits
-        delta=rang/levels
-        
-        for i in range(int(numSamples)):
-         levelIndex = math.floor((converyed_signals[i] - minval) / delta) # level number for which sampe belongs to
-         levelIndex = min(levelIndex, levels - 1) # for large values to equal large number in range
-         binary_code = format(levelIndex, f'0{int(bits)}b') #encoding level number 
-         encodedval.append(binary_code)
-         Quantized.append(round((minval + (levelIndex + 0.5) * delta),4))
-        return Quantized,encodedval
-        
-    # out,encodedvalue=bitquantization("/home/fatimakhalid/Desktop/DSP-Tasks/Task3/Quan1_input.txt",8)
-    # print(out,encodedvalue)
+        # Derive levels from bits if necessary
+        if bits is not None:
+            levels = 2 ** bits
+        else:
+            bits = int(math.log2(levels))
 
-    def levelquantization(signal,levels):
-        numSamples,index,signalVal = pre.quantizationFile(signal)
-        Quantized=[]
-        encodedval=[]
-        errorlist=[]
-        intervals=[]
-        signal_array = np.array(signalVal)
-        converyed_signals= signal_array.astype(float)
-        
-        minval=min(converyed_signals)
-        maxval=max(converyed_signals)
-        rang=maxval-minval
-        delta=rang/levels
-        bits=math.log2(levels)
+        # Use the preprocessor's readFile method
+        numSamples, index, signalVal = self.pre.readFile(signal)
+        signal_array = np.array(signalVal, dtype=float)
 
+        minval = np.min(signal_array)
+        maxval = np.max(signal_array)
+        rang = maxval - minval
+        delta = rang / levels
+
+        Quantized = []
+        Encoded = []
+        Intervals = []
+        ErrorList = []
 
         for i in range(int(numSamples)):
-         levelIndex = math.floor((converyed_signals[i] - minval) / delta) # level number for which sampe belongs to
-         levelIndex = min(levelIndex, levels - 1) # for large values to equal large number in range
-         intervals.append(levelIndex+1)
-         
-         binary_code = format(levelIndex, f'0{int(bits)}b') #encoding level number 
-         encodedval.append(binary_code)
-         Quantized.append(round((minval + (levelIndex + 0.5) * delta),4))
-         errorlist.append(round(Quantized[i]-converyed_signals[i],3))
-        return intervals,Quantized,encodedval,errorlist
-        
-    # intervals,quantized,encodedvalue,errorlist=levelquantization("/home/fatimakhalid/Desktop/DSP-Tasks/Task3/Quan2_input.txt",4)
+            levelIndex = math.floor((signal_array[i] - minval) / delta)
+            levelIndex = min(levelIndex, levels - 1)
+
+            Intervals.append(levelIndex + 1)
+
+            binary_code = format(levelIndex, f'0{int(bits)}b')
+            Encoded.append(binary_code)
+
+            q_val = round(minval + (levelIndex + 0.5) * delta, 4)
+            Quantized.append(q_val)
+            ErrorList.append(round(q_val - signal_array[i], 3))
+
+        return {
+            "intervals": Intervals,
+            "quantized": Quantized,
+            "encoded": Encoded,
+            "error": ErrorList
+        }
+   # intervals,quantized,encodedvalue,errorlist=levelquantization("/home/fatimakhalid/Desktop/DSP-Tasks/Task3/Quan2_input.txt",4)
     # print(intervals)
