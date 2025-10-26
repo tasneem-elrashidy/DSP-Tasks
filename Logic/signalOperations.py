@@ -1,5 +1,5 @@
 import numpy as np
-from Logic import pre
+import pre
 import math
 
 class oprations:
