@@ -3,11 +3,6 @@ from Logic import pre
 import math
 
 class oprations:
-    # indx1,val1 = pre.readFile("Signal1.txt")
-    # indx2,val2 = pre.readFile("Signal2.txt")
-    # indx1, val1 = pre.readFile("/home/fatimakhalid/Desktop/DSP-Tasks/Task3/Quan1_input.txt")
-    # indx2, val2 = pre.readFile("/home/fatimakhalid/Desktop/DSP-Tasks/Task1/input/Signal2.txt")
-
 
     def sub(sig1,sig2):
         indx1,val1 = pre.readFile(sig1)
@@ -93,7 +88,7 @@ class oprations:
         return indx,out
     # out=normOneToOne(val1)
     # print(out)
-    def quantization(self, signal, bits=None, levels=None):
+    def quantization(signal, bits=None, levels=None):
         if bits is None and levels is None:
             raise ValueError("You must specify either 'bits' or 'levels'.")
 
@@ -104,7 +99,7 @@ class oprations:
             bits = int(math.log2(levels))
 
         # Use the preprocessor's readFile method
-        numSamples, index, signalVal = self.pre.readFile(signal)
+        numSamples, index, signalVal = pre.readFile(signal)
         signal_array = np.array(signalVal, dtype=float)
 
         minval = np.min(signal_array)
@@ -137,4 +132,42 @@ class oprations:
             "error": ErrorList
         }
    # intervals,quantized,encodedvalue,errorlist=levelquantization("/home/fatimakhalid/Desktop/DSP-Tasks/Task3/Quan2_input.txt",4)
-    # print(intervals)
+   # print(intervals)
+
+    def Fouriore(Type,signal):
+     originalSignal=[]
+     phases=[]
+     amplitued=[]
+     index=[]
+     if(Type=="DFT"):
+      NumOfSamples,indx,value=pre.readFile(signal)
+      N = int(NumOfSamples)
+      n = np.array(indx, dtype=int) # convertit into an array of int
+      k = n.reshape((N, 1)) # reshapes the 1D array n into a column vector (N rows and 1 column.)
+
+      value=np.array(value, dtype=int)
+      e = np.exp(-2j * np.pi * k * n / N)
+      X_k = np.zeros_like(k, dtype=np.complex128) # setting the array X_k = 0real+0imag to fill its values
+      X_k = np.dot(e, value) # dot product (same as 2 for loops for summing the x[k] in n)
+      amplitued=np.abs(X_k) # calculate the amplitude
+      phases=np.angle(X_k) # calculate the tan inverse 
+
+
+     else: # if IDFT
+      NumOfSamples,amp,phase=pre.readFile(signal)
+      N = int(NumOfSamples)
+      n = np.arange(N)
+      index=n
+      k = n.reshape((N, 1)) # reshapes the 1D array n into a column vector (N rows and 1 column.)
+      amp = np.array([float(x.rstrip('f')) for x in amp], dtype=float) # convert to float array
+      phase=np.array([float(x.rstrip('f')) for x in phase], dtype=float)  # convert to float array
+      
+      X_k = amp * np.exp(1j*phase)
+      e = np.exp(2j * np.pi * k * n / N)
+      X_k = np.dot(e, X_k)/N # dot product
+      originalSignal= np.rint(X_k.real).astype(int) # round to nearest number
+
+     return index,originalSignal,amplitued,phases
+# indx,originalSignal,phases,amplitued=oprations.Fouriore("IDFT","Task4\\input_Signal_IDFT,A,phase.txt")
+# print(originalSignal)
+#    def CalcFrequencies(samplingFreq,phase,amplitude):

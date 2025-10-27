@@ -1,13 +1,14 @@
 import streamlit as st
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-from Logic import signalOperations
- 
+from  Logic import signalOperations
+
 
 st.title("Quantization")
 with st.form(key="Quantization_Form"):
     st.subheader("Upload Files")
     signal=st.file_uploader("Upload the First Signal", type=["txt"])
+    inputvalue=st.number_input("Enter number of bits or levels", min_value=1)
     choice=st.radio('Choose an Option',['levels','bits'])
     submit=st.form_submit_button(label="Submit")
     if submit:
@@ -15,8 +16,7 @@ with st.form(key="Quantization_Form"):
             st.warning("Please Fill all Fields!")
         else:
             if choice=='levels':
-             levels=st.number_input("Enter number of levels", min_value=1)
-             result =signalOperations.oprations.quantization(signal,levels=levels)
+             result =signalOperations.oprations.quantization(signal,bits=None,levels=inputvalue)
              intervals = result["intervals"]
              quantized = result["quantized"]
              encoded = result["encoded"]
@@ -28,8 +28,7 @@ with st.form(key="Quantization_Form"):
              st.write("**Encoded Values:**", encoded)
              st.write("**Quantization Error:**", error)
             else:
-             bits=st.number_input("Enter number of bits", min_value=1)
-             result =signalOperations.oprations.quantization(signal,bits=bits)
+             result =signalOperations.oprations.quantization(signal,bits=inputvalue,levels=None)
              intervals = result["intervals"]
              quantized = result["quantized"]
 
