@@ -3,13 +3,19 @@ import matplotlib as plt
 from Logic import signalOperations,pre
 
 
+def calcOmega(fs,N):
+   f=[]
+   omega=2*np.pi/(N*fs)
+   for i in range(0,N):
+      f.append(omega*(i+1))
+   return f
 
 def dominantFrequencies(amp,fs):
   out=[]
+  f=calcOmega(fs,len(amp))
   for i in range(0,len(amp)):
       if(amp[i]>.5):
-         omega=2*np.pi/(len(amp*fs))
-         out.append(omega*(i+1))
+         out.append(f[i])
   return out
 
 
@@ -21,10 +27,10 @@ def modifyAmpPhase(amp,phases,idx,newAmp,newPhase ):
 
 
 def removeDC(sig):
-   indx,originalsig,amp,phase=signalOperations.oprations.Fouriore("DFT",sig) #dft ver
+   indx,originalsig,amp,phase=signalOperations.oprations.Fouriore("DFT",signal=sig) #dft ver
    amp[0]=0
    phase[0]=0
 
-   indx,originalsig,amp,phase=signalOperations.oprations.Fouriore("IDFT",sig,amp=0,phase=0) #idft ver
+   indx,originalsig,amp,phase=signalOperations.oprations.Fouriore("IDFT",signal=sig,amp=amp,phase=phase) #idft ver
    return originalsig  
   

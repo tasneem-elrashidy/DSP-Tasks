@@ -1,5 +1,5 @@
 import math
-from Logic import signalOperations, pre
+from Logic import signalOperations, pre, functions
 
 def SignalComapreAmplitude(SignalInput=[], SignalOutput=[]):
     if len(SignalInput) != len(SignalOutput):
@@ -46,7 +46,7 @@ def SignalComaprePhaseShift(SignalInput=[], SignalOutput=[]):
 
 
 
-# IDFT TEST 
+# # IDFT TEST 
 # index, originalSignal, amplitued, phases = signalOperations.oprations.Fouriore("IDFT","Task4\input_Signal_IDFT,A,phase.txt")
 # N, expected_index, expected_signal = pre.readFile("Task4\Output_Signal_IDFT.txt")
 # expected_signal = [float(str(x).rstrip('f')) for x in expected_signal]
@@ -55,3 +55,8 @@ def SignalComaprePhaseShift(SignalInput=[], SignalOutput=[]):
 #     print("IDFT Test Passed successfully")
 # else:
 #     print("IDFT Test Failed ")
+
+# dc test
+
+sig=functions.removeDC("Task4\DC_component_input.txt")
+print(sig)

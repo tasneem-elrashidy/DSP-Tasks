@@ -140,7 +140,7 @@ class oprations:
    # intervals,quantized,encodedvalue,errorlist=levelquantization("/home/fatimakhalid/Desktop/DSP-Tasks/Task3/Quan2_input.txt",4)
    # print(intervals)
 
-    def Fouriore(Type,signal,amp=None,phase=None):
+    def Fouriore(Type,amp=None,phase=None):
 
      originalSignal=[]
      phases=[]
