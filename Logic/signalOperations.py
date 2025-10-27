@@ -140,7 +140,7 @@ class oprations:
    # intervals,quantized,encodedvalue,errorlist=levelquantization("/home/fatimakhalid/Desktop/DSP-Tasks/Task3/Quan2_input.txt",4)
    # print(intervals)
 
-    def Fouriore(Type,amp=None,phase=None):
+    def Fouriore(Type,signal=None ,ampl=None,phase1=None):
 
      originalSignal=[]
      phases=[]
@@ -161,15 +161,18 @@ class oprations:
 
 
      else: # if IDFT
-      NumOfSamples,amp,phase=pre.readFile(signal)
-      if amp is None and phase is None:
-         amp=0
-         phase=0
+      if ampl is not None and phase1 is not None:
+         amp=ampl
+         phase=phase1
+         amp=np.array(amp, dtype=float)
+         phase=np.array(phase, dtype=float)
+         removeDcOut=[]
       else:
+        NumOfSamples,amp,phase=pre.readFile(signal)
         amp = np.array([float(x.rstrip('f')) for x in amp], dtype=float) # convert to float array
         phase=np.array([float(x.rstrip('f')) for x in phase], dtype=float)  # convert to float array
       
-      N = int(NumOfSamples)
+      N = len(amp)
       n = np.arange(N)
       index=n
       k = n.reshape((N, 1)) # reshapes the 1D array n into a column vector (N rows and 1 column.)
@@ -177,7 +180,8 @@ class oprations:
       X_k = amp * np.exp(1j*phase)
       e = np.exp(2j * np.pi * k * n / N)
       X_k = np.dot(e, X_k)/N # dot product
-      originalSignal= np.rint(X_k.real).astype(int) # round to nearest number
+    #   originalSignal= np.rint(X_k.real).astype(int) # round to nearest number
+      originalSignal = X_k.real.astype(float)
 
      return index,originalSignal,amplitued,phases
 # indx,originalSignal,phases,amplitued=oprations.Fouriore("IDFT","Task4\\input_Signal_IDFT,A,phase.txt")

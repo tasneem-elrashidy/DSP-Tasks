@@ -29,7 +29,7 @@ def SignalComaprePhaseShift(SignalInput=[], SignalOutput=[]):
     return True
 
 # DFT TEST 
-# index, originalSignal, amplitued, phases = signalOperations.oprations.Fouriore("DFT", "Task4\input_Signal_DFT.txt")
+# index, originalSignal, amplitued, phases = signalOperations.oprations.Fouriore("DFT",signal="Task4\input_Signal_DFT.txt")
 # N, expected_amplitudes, expected_phases = pre.readFile("Task4\Output_Signal_DFT,A,phase.txt")
 
 # amplitude_result = SignalComapreAmplitude(amplitued, expected_amplitudes)
@@ -46,8 +46,9 @@ def SignalComaprePhaseShift(SignalInput=[], SignalOutput=[]):
 
 
 
-# # IDFT TEST 
-# index, originalSignal, amplitued, phases = signalOperations.oprations.Fouriore("IDFT","Task4\input_Signal_IDFT,A,phase.txt")
+# IDFT TEST 
+# index, originalSignal, amplitued, phases = signalOperations.oprations.Fouriore("IDFT",signal="Task4\input_Signal_IDFT,A,phase.txt")
+
 # N, expected_index, expected_signal = pre.readFile("Task4\Output_Signal_IDFT.txt")
 # expected_signal = [float(str(x).rstrip('f')) for x in expected_signal]
 
@@ -56,7 +57,3 @@ def SignalComaprePhaseShift(SignalInput=[], SignalOutput=[]):
 # else:
 #     print("IDFT Test Failed ")
 
-# dc test
-
-sig=functions.removeDC("Task4\DC_component_input.txt")
-print(sig)

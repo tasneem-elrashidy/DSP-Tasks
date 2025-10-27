@@ -31,6 +31,6 @@ def removeDC(sig):
    amp[0]=0
    phase[0]=0
 
-   indx,originalsig,amp,phase=signalOperations.oprations.Fouriore("IDFT",signal=sig,amp=amp,phase=phase) #idft ver
-   return originalsig  
+   indx,originalsig,amp,phase=signalOperations.oprations.Fouriore("IDFT",ampl=amp,phase1=phase) #idft ver
+   return indx,originalsig  
   
