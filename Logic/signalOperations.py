@@ -1,5 +1,5 @@
 import numpy as np
-import pre
+from Logic import pre
 import math
 
 class oprations:
@@ -63,15 +63,21 @@ class oprations:
     # out=acc(val1)
     # print(out)
 
-    def normZeroOne(sig1):
-        indx,val = pre.readFile(sig1)
+    def normZeroOne(sig1=None,values=None):
+        out = []
+        indx = []
+        if values is not None:
+           val = np.array(values, dtype=float)
+        if sig1 is not None:  
+           N,indx,val = pre.readFile(sig1) 
+        val = np.array(val, dtype=float)     
         out=[]
-        minval=int(val[0])
-        maxval=int(val[1000])
+        minval=val.min()
+        maxval=val.max()
         rang=maxval-minval
         
         for i in range(len(val)):
-            out.append((int(val[i])-minval)/(rang))
+             out.append(((val[i])-minval)/(rang))
         return indx,out
     # out=norm(val2)
     # print(out)
@@ -134,7 +140,8 @@ class oprations:
    # intervals,quantized,encodedvalue,errorlist=levelquantization("/home/fatimakhalid/Desktop/DSP-Tasks/Task3/Quan2_input.txt",4)
    # print(intervals)
 
-    def Fouriore(Type,signal):
+    def Fouriore(Type,signal,amp=None,phase=None):
+
      originalSignal=[]
      phases=[]
      amplitued=[]
@@ -145,7 +152,7 @@ class oprations:
       n = np.array(indx, dtype=int) # convertit into an array of int
       k = n.reshape((N, 1)) # reshapes the 1D array n into a column vector (N rows and 1 column.)
 
-      value=np.array(value, dtype=int)
+      value=np.array(value, dtype=float)
       e = np.exp(-2j * np.pi * k * n / N)
       X_k = np.zeros_like(k, dtype=np.complex128) # setting the array X_k = 0real+0imag to fill its values
       X_k = np.dot(e, value) # dot product (same as 2 for loops for summing the x[k] in n)
@@ -155,13 +162,18 @@ class oprations:
 
      else: # if IDFT
       NumOfSamples,amp,phase=pre.readFile(signal)
+      if amp is None and phase is None:
+         amp=0
+         phase=0
+      else:
+        amp = np.array([float(x.rstrip('f')) for x in amp], dtype=float) # convert to float array
+        phase=np.array([float(x.rstrip('f')) for x in phase], dtype=float)  # convert to float array
+      
       N = int(NumOfSamples)
       n = np.arange(N)
       index=n
       k = n.reshape((N, 1)) # reshapes the 1D array n into a column vector (N rows and 1 column.)
-      amp = np.array([float(x.rstrip('f')) for x in amp], dtype=float) # convert to float array
-      phase=np.array([float(x.rstrip('f')) for x in phase], dtype=float)  # convert to float array
-      
+
       X_k = amp * np.exp(1j*phase)
       e = np.exp(2j * np.pi * k * n / N)
       X_k = np.dot(e, X_k)/N # dot product

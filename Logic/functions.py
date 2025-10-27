@@ -1,8 +1,7 @@
-import streamlit as st 
 import numpy as np
 import matplotlib as plt
-import signalOperations
-import pre
+from Logic import signalOperations,pre
+
 
 
 def dominantFrequencies(amp,fs):
@@ -22,9 +21,10 @@ def modifyAmpPhase(amp,phases,idx,newAmp,newPhase ):
 
 
 def removeDC(sig):
-   amp,phase=dft(sig) #dft ver
+   indx,originalsig,amp,phase=signalOperations.oprations.Fouriore("DFT",sig) #dft ver
    amp[0]=0
    phase[0]=0
-   i=idft(amp,phase) #idft ver
-   return i  
+
+   indx,originalsig,amp,phase=signalOperations.oprations.Fouriore("IDFT",sig,amp=0,phase=0) #idft ver
+   return originalsig  
   

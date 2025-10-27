@@ -1,3 +1,5 @@
+from Logic import signalOperations, pre,functions
+
 def SignalsAreEqual(TaskName,given_output_filePath,Your_indices,Your_samples):
     expected_indices=[]
     expected_samples=[]
@@ -20,7 +22,7 @@ def SignalsAreEqual(TaskName,given_output_filePath,Your_indices,Your_samples):
                 break
     if (len(expected_samples)!=len(Your_samples)) and (len(expected_indices)!=len(Your_indices)):
          print(TaskName+" Test case failed, your signal have different length from the expected one")
-        return
+        # return
     for i in range(len(Your_indices)):
         if(Your_indices[i]!=expected_indices[i]):
             print(TaskName+" Test case failed, your signal have different indicies from the expected one") 
@@ -32,3 +34,8 @@ def SignalsAreEqual(TaskName,given_output_filePath,Your_indices,Your_samples):
             print(TaskName+" Test case failed, your signal have different values from the expected one") 
             return
     print(TaskName+" Test case passed successfully")
+
+new_indices, new_signal = functions.removeDC("Task4\DC_component_input.txt")
+# excepted_index, excepted_signal = pre.readFile("Task4\DC_component_input.txt")
+SignalsAreEqual("removeDC", "Task4\DC_component_output.txt", new_indices, new_signal)
+
