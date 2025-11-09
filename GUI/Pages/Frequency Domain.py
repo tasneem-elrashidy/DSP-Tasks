@@ -88,4 +88,14 @@ with st.form(key="DC_Form"):
         else:
             result = functions.removeDC(file)
             st.subheader("Signal After Removing DC Component:")
+
+            fig2 = go.Figure()
+            # fig2.add_trace(go.Scatter(x=result, y=indx, mode='lines+markers'))
+            # fig2.update_layout(
+            #      xaxis_title='index',
+            #      yaxis_title='values ',
+            #      title='indx vs values'
+            #  )
+            
+            # st.plotly_chart(fig2)
             st.write(result)

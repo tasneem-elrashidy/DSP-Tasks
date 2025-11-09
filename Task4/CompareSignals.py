@@ -35,6 +35,5 @@ def SignalsAreEqual(TaskName,given_output_filePath,Your_indices,Your_samples):
             return
     print(TaskName+" Test case passed successfully")
 
-new_indices, new_signal = functions.removeDC("Task4\DC_component_input.txt")
-# excepted_index, excepted_signal = pre.readFile("Task4\DC_component_input.txt")
-SignalsAreEqual("removeDC", "Task4\DC_component_output.txt", new_indices, new_signal)
+new_indices, new_signal = functions.removeDC("Task4/DC_component_input.txt")
+SignalsAreEqual("removeDC", "Task4/DC_component_output.txt", new_indices, new_signal)
