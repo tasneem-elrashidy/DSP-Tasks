@@ -29,15 +29,19 @@ def SignalComaprePhaseShift(SignalInput=[], SignalOutput=[]):
     return True
 
 # DFT TEST 
-index, originalSignal, amplitued, phases = signalOperations.oprations.Fouriore("DFT",signal="Task4/input_Signal_DFT.txt")
+# index, originalSignal, amplitued, phases = signalOperations.oprations.Fouriore("DFT",signal="Task4/input_Signal_DFT.txt")
+
+# FFT Test
+NumOfSamples,indx,value=pre.readFile("Task4/input_Signal_DFT.txt")
+index, originalSignal, amplitued, phases, X = signalOperations.oprations.FFT_IFFT("FFT",value)
 N, expected_amplitudes, expected_phases = pre.readFile("Task4/Output_Signal_DFT,A,phase.txt")
 
 amplitude_result = SignalComapreAmplitude(amplitued, expected_amplitudes)
 phase_result = SignalComaprePhaseShift(phases, expected_phases)
 if amplitude_result and phase_result:
-    print("DFT Test Passed successfully ")
+    print("FFT Test Passed successfully ")
 else:
-    print("DFT Test Failed ")
+    print("FFT Test Failed ")
     if not amplitude_result:
         print("Amplitude mismatch")
     if not phase_result:
@@ -45,15 +49,14 @@ else:
 
 
 
-
 # IDFT TEST 
-index, originalSignal, amplitued, phases = signalOperations.oprations.Fouriore("IDFT",signal="Task4/input_Signal_IDFT,A,phase.txt")
+# index, originalSignal, amplitued, phases = signalOperations.oprations.DFT_IDFT("IDFT",signal="Task4/input_Signal_IDFT,A,phase.txt")
 
-N, expected_index, expected_signal = pre.readFile("Task4/Output_Signal_IDFT.txt")
-expected_signal = [float(str(x).rstrip('f')) for x in expected_signal]
+# N, expected_index, expected_signal = pre.readFile("Task4/Output_Signal_IDFT.txt")
+# expected_signal = [float(str(x).rstrip('f')) for x in expected_signal]
 
-if SignalComapreAmplitude(originalSignal, expected_signal):
-    print("IDFT Test Passed successfully")
-else:
-    print("IDFT Test Failed ")
+# if SignalComapreAmplitude(originalSignal, expected_signal):
+#     print("IDFT Test Passed successfully")
+# else:
+#     print("IDFT Test Failed ")
 

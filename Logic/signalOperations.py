@@ -1,6 +1,9 @@
 import numpy as np
 from Logic import pre
 import math
+from cmath import exp, pi
+# from Logic.signalOperations import FFT_IFFT
+
 
 class oprations:
 
@@ -140,13 +143,13 @@ class oprations:
    # intervals,quantized,encodedvalue,errorlist=levelquantization("/home/fatimakhalid/Desktop/DSP-Tasks/Task3/Quan2_input.txt",4)
    # print(intervals)
 
-    def Fouriore(Type,signal=None ,ampl=None,phase1=None):
-
+    def DFT_IDFT(Type,signal=None ,ampl=None,phase1=None):
      originalSignal=[]
      phases=[]
      amplitued=[]
      index=[]
-     if(Type=="DFT"):
+
+     if(Type=="DFT"): # if DFT
       NumOfSamples,indx,value=pre.readFile(signal)
       N = int(NumOfSamples)
       n = np.array(indx, dtype=int) # convertit into an array of int
@@ -184,6 +187,55 @@ class oprations:
       originalSignal = X_k.real.astype(float)
 
      return index,originalSignal,amplitued,phases
-# indx,originalSignal,phases,amplitued=oprations.Fouriore("IDFT","Task4\\input_Signal_IDFT,A,phase.txt")
+# indx,originalSignal,phases,amplitued=oprations.DFT_IDFT("IDFT","Task4/input_Signal_IDFT,A,phase.txt")
 # print(originalSignal)
-#    def CalcFrequencies(samplingFreq,phase,amplitude):
+
+    def FFT_IFFT(Type, value=None, ampl=None, phase1=None):
+        originalSignal = []
+        phases = []
+        amplitued = []
+        X_recursive = []
+        index = []
+
+        if Type == "FFT":  # if FFT
+            value = np.array(value, dtype=complex)
+            N = len(value)
+
+            
+            if N <= 1:
+                X_recursive = value
+                amplitued = np.abs(value)
+                phases = np.angle(value)
+                return index, originalSignal, amplitued, phases, X_recursive
+
+            # Recursive case
+            L1 = value[::2]  # even indices
+            L2 = value[1::2]  # odd indices
+
+            index, originalSignal, amplitued, phases, fft_1 = oprations.FFT_IFFT("FFT", L1)
+            index, originalSignal, amplitued, phases, fft_2 = oprations.FFT_IFFT("FFT", L2)
+
+            # Vectorized combination (faster than loop)
+            factor = np.exp(-1j * 2 * np.pi * np.arange(N // 2) / N)
+            X_recursive = np.concatenate([
+                fft_1 + factor * fft_2,
+                fft_1 - factor * fft_2
+            ])
+
+            amplitued = np.abs(X_recursive)
+            phases = np.angle(X_recursive)
+
+        else:  # if IFFT
+            pass
+
+        return index, originalSignal, amplitued, phases, X_recursive
+
+
+# NumOfSamples,indx,value=pre.readFile("Task4/input_Signal_DFT.txt")
+# indx,originalSignal,phases,amplitued,x=oprations.FFT_IFFT("FFT",value=value)
+# print("Amplitudes:", amplitued)
+# print("Phases:", phases)
+# print("FFT Output:", x)
+
+
+     

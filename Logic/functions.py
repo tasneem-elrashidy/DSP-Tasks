@@ -27,10 +27,10 @@ def modifyAmpPhase(amp,phases,idx,newAmp,newPhase ):
 
 
 def removeDC(sig):
-   indx,originalsig,amp,phase=signalOperations.oprations.Fouriore("DFT",signal=sig) #dft ver
+   indx,originalsig,amp,phase=signalOperations.oprations.DFT_IDFT("DFT",signal=sig) #dft ver
    amp[0]=0
    phase[0]=0
 
-   indx,originalsig,amp,phase=signalOperations.oprations.Fouriore("IDFT",ampl=amp,phase1=phase) #idft ver
+   indx,originalsig,amp,phase=signalOperations.oprations.DFT_IDFT("IDFT",ampl=amp,phase1=phase) #idft ver
    return indx,originalsig  
   

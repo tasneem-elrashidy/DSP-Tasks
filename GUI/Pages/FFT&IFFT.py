@@ -3,11 +3,12 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 from Logic import signalOperations
 from Logic import functions
+from Logic import pre
 import numpy as np
 
 st.title("Frequency Domain")
 with st.form(key="FD_Form"):
-    choice=st.radio('Choose an Option',['DFT','IDFT'])
+    choice=st.radio('Choose an Option',['FFT','IFFT'])
     st.subheader("Upload a File")
     file=st.file_uploader("Upload the File", type=["txt"])
     fs=st.number_input("Enter a Sampling Frequency")
@@ -23,14 +24,15 @@ with st.form(key="FD_Form"):
         else:
             # st.balloons()
             # st.snow()
-            indx, originalsig, amp, phase = signalOperations.oprations.Fouriore(choice, file)
+            NumOfSamples,indx,value=pre.readFile(file)
+            indx, originalsig, amp, phase,X = signalOperations.oprations.FFT_IFFT(choice, value)
 
             # Modify amplitude & phase if values provided
             if new_amp != 0 or new_phase != 0:
                 amp, phase = functions.modifyAmpPhase(amp, phase, int(idx), new_amp, new_phase)
 
             # If DFT → Normalize amplitude and plot
-            if choice == "DFT":
+            if choice == "FFT":
                 amp = np.array(amp)
                 phase = np.array(phase)
 
@@ -66,7 +68,7 @@ with st.form(key="FD_Form"):
                 st.write(dom_freqs)
 
             # If IDFT → Reconstruct time-domain signal
-            elif choice == "IDFT":
+            elif choice == "IFFT":
                 st.subheader("Reconstructed Signal")
                 fig3 = go.Figure()
                 fig3.add_trace(go.Scatter(x=indx, y=originalsig, mode='lines+markers'))
