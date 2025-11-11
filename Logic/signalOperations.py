@@ -226,8 +226,35 @@ class oprations:
             phases = np.angle(X_recursive)
 
         else:  # if IFFT
-            pass
+            if ampl is not None and phase1 is not None:
+               amp = np.array(ampl, dtype=float)
+               phase = np.array(phase1, dtype=float)
+            else:
+              NumOfSamples, amp, phase = pre.readFile(signal)
+              amp = np.array([float(x.rstrip('f')) for x in amp], dtype=float)
+              phase = np.array([float(x.rstrip('f')) for x in phase], dtype=float)
 
+            N = len(amp)
+            index = np.arange(N)    
+            X_k = amp * np.exp(1j * phase)
+
+            if N <= 1:
+                return index, X_k.real, np.abs(X_k), np.angle(X_k), X_k
+
+            L1 = X_k[::2]  
+            L2 = X_k[1::2] 
+
+            index, originalSignal, amplitued, phases, even = FFT_IFFT("IFFT", L1)
+            index, originalSignal, amplitued, phases, odd = FFT_IFFT("IFFT", L2)
+
+            factor = np.exp(1j * 2 * np.pi * np.arange(N // 2) / N)
+            X_recursive = np.concatenate([
+                even + factor * odd,
+                even - factor * odd]) /2
+
+            originalSignal = X_recursive.real
+            amplitued = np.abs(X_recursive)
+            phases = np.angle(X_recursive)
         return index, originalSignal, amplitued, phases, X_recursive
 
 
