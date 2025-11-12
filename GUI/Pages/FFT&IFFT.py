@@ -67,7 +67,7 @@ with st.form(key="FD_Form"):
                 st.subheader("Dominant Frequencies (> 0.5):")
                 st.write(dom_freqs)
 
-            # If IDFT → Reconstruct time-domain signal
+            # If IFFT → Reconstruct time-domain signal
             elif choice == "IFFT":
                 st.subheader("Reconstructed Signal")
                 fig3 = go.Figure()

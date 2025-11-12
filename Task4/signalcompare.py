@@ -50,13 +50,16 @@ else:
 
 
 # IDFT TEST 
-# index, originalSignal, amplitued, phases = signalOperations.oprations.DFT_IDFT("IDFT",signal="Task4/input_Signal_IDFT,A,phase.txt")
 
-# N, expected_index, expected_signal = pre.readFile("Task4/Output_Signal_IDFT.txt")
-# expected_signal = [float(str(x).rstrip('f')) for x in expected_signal]
+NumOfSamples,amp,phase=pre.readFile("Task4\input_Signal_IDFT,A,phase.txt")
+# index, originalSignal, amplitued, phases, X = signalOperations.oprations.FFT_IFFT("FFT",value)
+index, originalSignal, amplitued, phases,X = signalOperations.oprations.FFT_IFFT("IFFT",ampl=amp,phase1=phase)
 
-# if SignalComapreAmplitude(originalSignal, expected_signal):
-#     print("IDFT Test Passed successfully")
-# else:
-#     print("IDFT Test Failed ")
+N, expected_index, expected_signal = pre.readFile("Task4/Output_Signal_IDFT.txt")
+expected_signal = [float(str(x).rstrip('f')) for x in expected_signal]
+
+if SignalComapreAmplitude(originalSignal, expected_signal):
+    print("IDFT Test Passed successfully")
+else:
+    print("IDFT Test Failed ")
 

@@ -208,14 +208,14 @@ class oprations:
                 phases = np.angle(value)
                 return index, originalSignal, amplitued, phases, X_recursive
 
-            # Recursive case
+            
             L1 = value[::2]  # even indices
             L2 = value[1::2]  # odd indices
 
             index, originalSignal, amplitued, phases, fft_1 = oprations.FFT_IFFT("FFT", L1)
             index, originalSignal, amplitued, phases, fft_2 = oprations.FFT_IFFT("FFT", L2)
 
-            # Vectorized combination (faster than loop)
+            
             factor = np.exp(-1j * 2 * np.pi * np.arange(N // 2) / N)
             X_recursive = np.concatenate([
                 fft_1 + factor * fft_2,
@@ -227,34 +227,37 @@ class oprations:
 
         else:  # if IFFT
             if ampl is not None and phase1 is not None:
-               amp = np.array(ampl, dtype=float)
-               phase = np.array(phase1, dtype=float)
-            else:
-              NumOfSamples, amp, phase = pre.readFile(signal)
-              amp = np.array([float(x.rstrip('f')) for x in amp], dtype=float)
-              phase = np.array([float(x.rstrip('f')) for x in phase], dtype=float)
+            #    amp = np.array(ampl, dtype=float)
+            #    phase = np.array(phase1, dtype=float)
+            
+                amp = np.array([float(x.rstrip('f')) for x in ampl], dtype=float) # convert to float array
+                phase=np.array([float(x.rstrip('f')) for x in phase1], dtype=float)  # convert to float array
+            # else:
+            #   NumOfSamples, amp, phase = pre.readFile(signal)
+            #   amp = np.array([float(x.rstrip('f')) for x in amp], dtype=float)
+            #   phase = np.array([float(x.rstrip('f')) for x in phase], dtype=float)
 
-            N = len(amp)
-            index = np.arange(N)    
-            X_k = amp * np.exp(1j * phase)
+                N = len(amp)
+                index = np.arange(N)    
+                X_k = amp * np.exp(1j * phase)
 
-            if N <= 1:
-                return index, X_k.real, np.abs(X_k), np.angle(X_k), X_k
+                if N <= 1:
+                    return index, X_k.real, np.abs(X_k), np.angle(X_k), X_k
 
-            L1 = X_k[::2]  
-            L2 = X_k[1::2] 
+                L1 = X_k[::2]  
+                L2 = X_k[1::2] 
 
-            index, originalSignal, amplitued, phases, even = FFT_IFFT("IFFT", L1)
-            index, originalSignal, amplitued, phases, odd = FFT_IFFT("IFFT", L2)
+                index, originalSignal, amplitued, phases, even = oprations.FFT_IFFT("IFFT", L1)
+                index, originalSignal, amplitued, phases, odd = oprations.FFT_IFFT("IFFT", L2)
 
-            factor = np.exp(1j * 2 * np.pi * np.arange(N // 2) / N)
-            X_recursive = np.concatenate([
-                even + factor * odd,
-                even - factor * odd]) /2
+                factor = np.exp(1j * 2 * np.pi * np.arange(N // 2) / N)
+                X_recursive = np.concatenate([
+                    even + factor * odd,
+                    even - factor * odd]) /2
 
-            originalSignal = X_recursive.real
-            amplitued = np.abs(X_recursive)
-            phases = np.angle(X_recursive)
+                originalSignal = X_recursive.real
+                amplitued = np.abs(X_recursive)
+                phases = np.angle(X_recursive)
         return index, originalSignal, amplitued, phases, X_recursive
 
 
