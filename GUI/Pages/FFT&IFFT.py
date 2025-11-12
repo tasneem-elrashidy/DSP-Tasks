@@ -24,8 +24,12 @@ with st.form(key="FD_Form"):
         else:
             # st.balloons()
             # st.snow()
-            NumOfSamples,indx,value=pre.readFile(file)
-            indx, originalsig, amp, phase,X = signalOperations.oprations.FFT_IFFT(choice, value)
+            if choice == "FFT":
+                NumOfSamples,indx,value=pre.readFile(file)
+                indx, originalsig, amp, phase,X = signalOperations.oprations.FFT_IFFT(choice, value=value)
+            else: 
+                indx, originalsig, amp, phase,X = signalOperations.oprations.FFT_IFFT(choice, signal=file)
+
 
             # Modify amplitude & phase if values provided
             if new_amp != 0 or new_phase != 0:
@@ -71,7 +75,7 @@ with st.form(key="FD_Form"):
             elif choice == "IFFT":
                 st.subheader("Reconstructed Signal")
                 fig3 = go.Figure()
-                fig3.add_trace(go.Scatter(x=indx, y=originalsig, mode='lines+markers'))
+                fig3.add_trace(go.Scatter(x=np.arange(len(originalsig)),y=originalsig,mode='lines+markers'))
                 fig3.update_layout(
                     xaxis_title='Index',
                     yaxis_title='Amplitude',

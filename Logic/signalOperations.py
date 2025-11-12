@@ -190,7 +190,7 @@ class oprations:
 # indx,originalSignal,phases,amplitued=oprations.DFT_IDFT("IDFT","Task4/input_Signal_IDFT,A,phase.txt")
 # print(originalSignal)
 
-    def FFT_IFFT(Type, value=None, ampl=None, phase1=None):
+    def FFT_IFFT(Type, signal=None,value=None, ampl=None, phase1=None):
         originalSignal = []
         phases = []
         amplitued = []
@@ -231,8 +231,8 @@ class oprations:
                phase = np.array(phase1, dtype=float)
             else:
               NumOfSamples, amp, phase = pre.readFile(signal)
-              amp = np.array([float(x.rstrip('f')) for x in amp], dtype=float)
-              phase = np.array([float(x.rstrip('f')) for x in phase], dtype=float)
+              amp = np.array([float(x.rstrip('f')) for x in amp], dtype=float) # convert to float array
+              phase=np.array([float(x.rstrip('f')) for x in phase], dtype=float)
 
             N = len(amp)
             index = np.arange(N)    
@@ -244,8 +244,8 @@ class oprations:
             L1 = X_k[::2]  
             L2 = X_k[1::2] 
 
-            index, originalSignal, amplitued, phases, even = FFT_IFFT("IFFT", L1)
-            index, originalSignal, amplitued, phases, odd = FFT_IFFT("IFFT", L2)
+            index, originalSignal, amplitued, phases, even = oprations.FFT_IFFT("IFFT", ampl=np.abs(L1), phase1=np.angle(L1))
+            index, originalSignal, amplitued, phases, odd = oprations.FFT_IFFT("IFFT", ampl=np.abs(L2), phase1=np.angle(L2))
 
             factor = np.exp(1j * 2 * np.pi * np.arange(N // 2) / N)
             X_recursive = np.concatenate([
