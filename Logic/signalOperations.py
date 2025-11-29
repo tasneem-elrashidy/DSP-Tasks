@@ -212,8 +212,8 @@ class oprations:
             L1 = value[::2]  # even indices
             L2 = value[1::2]  # odd indices
 
-            index, originalSignal, amplitued, phases, fft_1 = oprations.FFT_IFFT("FFT", L1)
-            index, originalSignal, amplitued, phases, fft_2 = oprations.FFT_IFFT("FFT", L2)
+            index, originalSignal, amplitued, phases, fft_1 = oprations.FFT_IFFT("FFT", value=L1)
+            index, originalSignal, amplitued, phases, fft_2 = oprations.FFT_IFFT("FFT",value= L2)
 
             # Vectorized combination (faster than loop)
             factor = np.exp(-1j * 2 * np.pi * np.arange(N // 2) / N)
