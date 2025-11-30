@@ -1,0 +1,58 @@
+from Logic import pre
+from Task7 import task7
+
+def Shift_Fold_Signal(file_name,Your_indices,Your_samples):      
+    expected_indices=[]
+    expected_samples=[]
+    with open(file_name, 'r') as f:
+        line = f.readline()
+        line = f.readline()
+        line = f.readline()
+        line = f.readline()
+        while line:
+            # process line
+            L=line.strip()
+            if len(L.split(' '))==2:
+                L=line.split(' ')
+                V1=int(L[0])
+                V2=float(L[1])
+                expected_indices.append(V1)
+                expected_samples.append(V2)
+                line = f.readline()
+            else:
+                break
+    print("Current Output Test file is: ")
+    print(file_name)
+    print("\n")
+    if (len(expected_samples)!=len(Your_samples)) and (len(expected_indices)!=len(Your_indices)):
+        print("Shift_Fold_Signal Test case failed, your signal have different length from the expected one")
+        return
+    for i in range(len(Your_indices)):
+        if(Your_indices[i]!=expected_indices[i]):
+            print("Shift_Fold_Signal Test case failed, your signal have different indicies from the expected one") 
+            return
+    for i in range(len(expected_samples)):
+        if abs(int(Your_samples[i]) - int( expected_samples[i])) < 0.01:
+            continue
+        else:
+            print("Shift_Fold_Signal Test case failed, your signal have different values from the expected one") 
+            return
+    print("Shift_Fold_Signal Test case passed successfully")
+
+
+NumOfSamples,indx,value=pre.readFile("Task7/TestCases/ShiftingandFolding/input_fold.txt")
+# folded=task7.Folding(value)
+# delayed=task7.shifting(folded,500)
+# indices = list(range(len(delayed)))
+# Shift_Fold_Signal("Task7/TestCases/ShiftingandFolding/Output_ShifFoldedby500.txt",indices,delayed)
+# print(indices,"\n",delayed)
+folded = task7.Folding(value)
+k = 500 # match the test's expected shift
+# folded = np.array(folded, dtype=int)
+
+# shifted = [int(v) + (-k) for v in folded]  # just add k to values
+# Shift_Fold_Signal(
+#     "Task7/TestCases/ShiftingandFolding/Output_ShifFoldedby500.txt",shifted,
+#     list(range(len(shifted)))  # or use folded indices if test expects them
+# )
+# print(shifted)
