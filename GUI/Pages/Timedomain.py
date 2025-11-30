@@ -9,7 +9,7 @@ with st.form(key="time_domain"):
     
     option = st.selectbox(
         "What Time Domain opration you would like t do?",
-        ( "Smoothing","Sharpining","Shifting","Folding","Shifting a folded signal","RemoveDC component"),
+        ( "Smoothing","Sharpining","Shifting","Folding","Shifting & folding","RemoveDC component"),
     )
     submit=st.form_submit_button(label="Submit")
     if submit:
@@ -42,13 +42,13 @@ with st.form(key="time_domain"):
                     st.subheader("Folding Results")
                     st.write("**values:**", result)
 
-                elif(option=="Shifting a folded signal"):
+                elif(option=="Shifting & folding"):
                     k=st.number_input("Enter shifting steps")
                     result=task7.Folding(value)
-                    shifted=task7.shifting(result,k)
+                    shifted=task7.shifting(index,k)
                     st.subheader("Shifting a folded signal Results")
-                    st.write("**values:**", shifted)
-                    st.write("**indices:**", result)
+                    st.write("**values:**", result)
+                    st.write("**indices:**", shifted)
 
                 elif(option=="RemoveDC component"):
                     result=task7.removeDcTimeDomain(value)

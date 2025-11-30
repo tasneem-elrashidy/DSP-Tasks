@@ -33,10 +33,10 @@ def movingAvg(x,windowSize):
 # print(arr)
 
 
-def shifting(val, k):
-    # shifted_signal = [0]*k + val[:-k]
-    val = np.array(val, dtype=int)
-    return  [v + k for v in val]
+def shifting(indx, k):
+    indx = np.array(indx, dtype=float)
+    shifted_indices = [i + k for i in indx]
+    return shifted_indices
 
 
 def sharpening(x):
@@ -63,7 +63,8 @@ def sharpening(x):
 
 
 def Folding(x):
-  return x[::-1]
+  arr = np.array(x, dtype=float)   # force numeric floats
+  return arr[::-1].tolist()
 
 
 def removeDcTimeDomain(x):

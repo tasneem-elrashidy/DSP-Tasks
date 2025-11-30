@@ -1,5 +1,6 @@
 from Logic import pre
 from Task7 import task7
+import numpy as np
 
 def Shift_Fold_Signal(file_name,Your_indices,Your_samples):      
     expected_indices=[]
@@ -40,19 +41,10 @@ def Shift_Fold_Signal(file_name,Your_indices,Your_samples):
     print("Shift_Fold_Signal Test case passed successfully")
 
 
-NumOfSamples,indx,value=pre.readFile("Task7/TestCases/ShiftingandFolding/input_fold.txt")
-# folded=task7.Folding(value)
-# delayed=task7.shifting(folded,500)
-# indices = list(range(len(delayed)))
-# Shift_Fold_Signal("Task7/TestCases/ShiftingandFolding/Output_ShifFoldedby500.txt",indices,delayed)
-# print(indices,"\n",delayed)
-folded = task7.Folding(value)
-k = 500 # match the test's expected shift
-# folded = np.array(folded, dtype=int)
 
-# shifted = [int(v) + (-k) for v in folded]  # just add k to values
-# Shift_Fold_Signal(
-#     "Task7/TestCases/ShiftingandFolding/Output_ShifFoldedby500.txt",shifted,
-#     list(range(len(shifted)))  # or use folded indices if test expects them
-# )
-# print(shifted)
+# NumOfSamples,indx,value=pre.readFile("Task7/TestCases/ShiftingandFolding/input_fold.txt")
+# folded=task7.Folding(value)
+# shifted_indx=task7.shifting(indx,500)
+# Shift_Fold_Signal("Task7/TestCases/ShiftingandFolding/Output_ShifFoldedby500.txt",shifted_indx,folded)
+# Shift_Fold_Signal("Task7/TestCases/ShiftingandFolding/Output_ShiftFoldedby-500.txt",shifted_indx,folded)
+
