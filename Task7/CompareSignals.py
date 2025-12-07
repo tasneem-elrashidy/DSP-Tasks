@@ -40,6 +40,6 @@ def SignalsAreEqual(TaskName,given_output_filePath,Your_indices,Your_samples):
 # SignalsAreEqual("removeDC", "Task4/DC_component_output.txt", list(range(len(new_signal))), new_signal)
 
 
-# NumOfSamples,index,value=pre.readFile("Task2\Signal1.txt")
-# arr,indx=task7.movingAvg(value,3)
-# SignalsAreEqual("move avarage", "Task7\TestCases\TestCases\Moving Average\OutMovAvgTest1.txt",indx , arr)
+NumOfSamples,index,value=pre.readFile("Task2/Signal1.txt")
+arr,indx=task7.movingAvg(value,3)
+SignalsAreEqual("move avarage", "Task7/TestCases/MovingAverage/OutMovAvgTest1.txt",indx , arr)
