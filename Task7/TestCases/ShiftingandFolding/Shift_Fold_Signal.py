@@ -42,9 +42,9 @@ def Shift_Fold_Signal(file_name,Your_indices,Your_samples):
 
 
 
-# NumOfSamples,indx,value=pre.readFile("Task7/TestCases/ShiftingandFolding/input_fold.txt")
-# folded=task7.Folding(value)
-# shifted_indx=task7.shifting(indx,500)
+NumOfSamples,indx,value=pre.readFile("Task7/TestCases/ShiftingandFolding/input_fold.txt")
+folded=task7.Folding(value)
+shifted_indx=task7.shifting(indx,-500)
 # Shift_Fold_Signal("Task7/TestCases/ShiftingandFolding/Output_ShifFoldedby500.txt",shifted_indx,folded)
-# Shift_Fold_Signal("Task7/TestCases/ShiftingandFolding/Output_ShiftFoldedby-500.txt",shifted_indx,folded)
+Shift_Fold_Signal("Task7/TestCases/ShiftingandFolding/Output_ShiftFoldedby-500.txt",shifted_indx,folded)
 
