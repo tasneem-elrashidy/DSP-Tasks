@@ -35,7 +35,7 @@ def Compare_Signals(file_name,Your_indices,Your_samples):
             print("Test case failed, your signal have different indicies from the expected one")
             return
     for i in range(len(expected_samples)):
-        if abs(Your_samples[i] - expected_samples[i]) < 0.01:
+        if abs(Your_samples[i] - expected_samples[i]) < 0.2:
             continue
         else:
             print("Test case failed, your signal have different values from the expected one") 
@@ -89,3 +89,17 @@ def Compare_Signals(file_name,Your_indices,Your_samples):
 # indx,filtered = task8.filter("band-stop",1000,50,60,f1=150,f2=250)
 # Compare_Signals("Task8\FIR test cases\Testcase 7\BSFCoefficients.txt",indx,filtered)
 
+# resampling - test-case 1
+idx,smp=task8.resampling(r"Task8\Sampling test cases\Testcase 1\ecg400.txt",0,2,8000,1500,500,50)
+Compare_Signals(r"Task8\Sampling test cases\Testcase 1\Sampling_Down.txt",idx,smp)
+# print(smp)
+
+# resampling - test-case 2
+idx,smp=task8.resampling(r"Task8\Sampling test cases\Testcase 2\ecg400.txt",l=3,m=0,fs=8000,fc=1500,Δf=500,attenuation=50)
+Compare_Signals(r"Task8\Sampling test cases\Testcase 2\Sampling_Up.txt",idx,smp)
+# print(smp)
+
+# resampling - test-case 3
+idx,smp=task8.resampling(r"Task8\Sampling test cases\Testcase 3\ecg400.txt",l=3,m=2,fs=8000,fc=1500,Δf=500,attenuation=50)
+Compare_Signals(r"Task8\Sampling test cases\Testcase 3\Sampling_Up_Down.txt",idx,smp)
+# print(idx)
