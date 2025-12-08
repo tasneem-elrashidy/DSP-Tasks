@@ -73,7 +73,10 @@ def removeDcTimeDomain(x):
 
 
 def convolveSignals(idx1,smp1,idx2,smp2):
-
+    idx1= np.array(idx1, dtype=int)
+    idx2= np.array(idx2, dtype=int)
+    smp1= np.array(smp1, dtype=float)
+    smp2= np.array(smp2, dtype=float)
     st=idx1[0]+idx2[0]
     end=idx1[-1]+idx2[-1]
     res_idx=list(range(st,end +1))
