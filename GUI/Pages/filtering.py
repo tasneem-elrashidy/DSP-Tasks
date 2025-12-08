@@ -2,6 +2,7 @@ import numpy as np
 import streamlit as st
 from Logic import pre
 from Task7 import task7
+from Task8 import task8
 import plotly.graph_objects as go
 
 st.title("Filtering & Resampling oprations")
@@ -20,15 +21,16 @@ with st.form(key="task8"):
         else:
             NumOfSamples,index,value=pre.readFile(signal)
             if(option=="Filtering"):
-                k=st.number_input("Enter the window size to Multiply")
-
+                indx1,filtered = task8.filter("low-pass",8000,500,50,fc=1500)
+                    
             elif(option=="Resampling"):
                 k=st.number_input("Enter shifting steps")
-                result=task7.Folding(value)
-                shifted=task7.shifting(index,k)
-                st.subheader("Shifting a folded signal Results")
-                st.write("**values:**", result)
-                st.write("**indices:**", shifted)
+if submit:
+ st.download_button(
+                label="Download filtered signal",
+                data="\n".join(map(str, filtered.tolist())),
+                file_name="fi;tered.txt"
+            )
 
 
                
