@@ -23,7 +23,7 @@ with st.form(key="task8"):
                 f1 = st.number_input("Band Start (f1)",value=150)
                 f2 = st.number_input("Band End (f2)",value=250)
                     
-            if(option=="Resampling"):
+            elif(option=="Resampling"):
                 l=st.number_input("Enter L")
                 m=st.number_input("Enter M")
 
@@ -31,17 +31,25 @@ with st.form(key="task8"):
 if submit:
                 if not signal :
                     st.warning("Please Fill all Fields!")
-                elif(option=="Filtering"):
-                    NumOfSamples,index,value=pre.readFile(signal)
+                if(option=="Filtering"):
+                    # NumOfSamples,index,value=pre.readFile(signal)
                     if mode in ["low-pass", "high-pass"]:
                         indx1, filtered = task8.filter(mode, Fs, transition, StopBandAttenuation, fc=fc)
                     else:   
                         indx1, filtered = task8.filter(mode, Fs, transition, StopBandAttenuation, f1=f1, f2=f2)
+                    fig = go.Figure()
+                    fig.add_trace(go.Scatter(x=indx1,y=filtered,mode='lines+markers'))
+                    fig.update_layout(
+                        xaxis_title='Index',
+                        yaxis_title='Samples',
+                    )
+                    st.plotly_chart(fig)
                     st.download_button(label="Download filtered signal",
                             data="\n".join(map(str, filtered.tolist())),
                             file_name="filtered.txt")
+                    
                 elif(option=="Resampling"):
-                       NumOfSamples,index,value=pre.readFile(signal)
+                    #    NumOfSamples,index,value=pre.readFile(signal)
                        indx,Resampled=task8.resampling(value,l,m)
                        st.download_button(label="Download filtered signal",
                             data="\n".join(map(str, Resampled.tolist())),
