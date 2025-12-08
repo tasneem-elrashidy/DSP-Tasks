@@ -17,11 +17,11 @@ def filter(type,fs,Δf,attenution,fc=None,f1=None,f2=None):
     else:   # blackman
         N = math.ceil(5.5 / Δf2)
         win = np.blackman
-
     if(N%2==0):
         N=N+1
     M = (N-1)//2 # calculate center for symetricity
     h = np.zeros(N)
+
     if (type=="low-pass"):
             fc=(fc+(Δf/2)) /fs
             for n in range(N): # calculate the hd(n): ampulse responses
@@ -29,7 +29,8 @@ def filter(type,fs,Δf,attenution,fc=None,f1=None,f2=None):
                     h[n]=2*fc
                 else:
                     i = n - M
-                    h[n]=2*fc*math.sin(i*2*math.pi*fc)/(i*2*math.pi*fc)
+                    h[n]=2*fc*np.sin(i*2*np.pi*fc)/(i*2*np.pi*fc)
+    
     elif (type=="high-pass"):
             fc=(fc-(Δf/2))/fs
             for n in range(N):
@@ -37,8 +38,8 @@ def filter(type,fs,Δf,attenution,fc=None,f1=None,f2=None):
                     h[n]=1-2*fc 
                 else:
                     i = n - M
-                    h[n]=-(2*fc*math.sin(i*2*math.pi*fc)/(i*2*math.pi*fc))
-                    
+                    h[n]=-(2*fc*np.sin(i*2*np.pi*fc)/(i*2*np.pi*fc))
+        
     elif (type=="band-pass"):
             fc1 = (f1-(Δf/2))/fs
             fc2 = (f2+(Δf/2))/fs
@@ -47,7 +48,8 @@ def filter(type,fs,Δf,attenution,fc=None,f1=None,f2=None):
                      h[n]=2*(fc2-fc1)
                 else:
                     i = n - M
-                    h[n]=(2*fc2*math.sin(i*2*math.pi*fc2)/(i*2*math.pi*fc2))-(2*fc1*math.sin(i*2*math.pi*fc1)/(i*2*math.pi*fc1))
+                    h[n]=(2*fc2*np.sin(i*2*np.pi*fc2)/(i*2*np.pi*fc2))-(2*fc1*np.sin(i*2*np.pi*fc1)/(i*2*np.pi*fc1))
+    
     elif (type=="band-stop"):
             fc1 = (f1+(Δf/2))/fs
             fc2 = (f2-(Δf/2))/fs
@@ -56,7 +58,7 @@ def filter(type,fs,Δf,attenution,fc=None,f1=None,f2=None):
                     h[n]=1-2*(fc2-fc1)
                 else:
                     i = n - M
-                    h[n]=(2*fc1*math.sin(i*2*math.pi*fc1)/(i*2*math.pi*fc1))-(2*fc2*math.sin(i*2*math.pi*fc2)/(i*2*math.pi*fc2))
+                    h[n]=(2*fc1*np.sin(i*2*np.pi*fc1)/(i*2*np.pi*fc1))-(2*fc2*np.sin(i*2*np.pi*fc2)/(i*2*np.pi*fc2))
 
     w = win(N) # window arr of length N 
     h = h * w

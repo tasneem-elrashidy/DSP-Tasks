@@ -24,8 +24,6 @@ with st.form(key='Gen_form'):
         if not all(values.values()) or not choice:
             st.warning("Please Fill all Fields!")
         else:
-            # st.balloons()
-            # st.snow()
             idx,out=GenerateSignals.SignalGenerator.generate(values['type'],values['amp'], values['frq'],values['fs'],values['theta'])
             st.subheader("The Signal Generated")
             fig = go.Figure()
