@@ -43,15 +43,15 @@ def Compare_Signals(file_name,Your_indices,Your_samples):
     print("Test case passed successfully")
 
 # test-case 1 passed
-# NumOfSamples,index,value=pre.readFile("Task8/FIR test cases/Testcase 1/Filter Specifications.txt")
-# indx,filtered = task8.filter(value,"low-pass",8000,500,50,fc=1500)
+# indx,filtered = task8.filter("low-pass",8000,500,50,fc=1500)
 # Compare_Signals("Task8/FIR test cases/Testcase 1/LPFCoefficients.txt",indx,filtered)
 
 
 # test-case 2
 # NumOfSamples,index,value= pre.readFile("Task8/FIR test cases/Testcase 2/ecg400.txt")
-# NumOfSamplesspec, indexspec, valuespec = pre.readFile("Task8/FIR test cases/Testcase 2/Filter Specifications.txt")
-# indx1,filtered = task8.filter(valuespec,"low-pass",8000,500,50,fc=1500)
+# indx1,filtered = task8.filter("low-pass",8000,500,50,fc=1500)
+# value = [float(v) for v in value]
+# index = [int(i) for i in index]
 # indx,filtervalues=task7.convolveSignals(index,value,indx1,filtered)
 # filtervalues=np.array(filtervalues)
 # print(filtervalues)
@@ -59,36 +59,33 @@ def Compare_Signals(file_name,Your_indices,Your_samples):
 
 
 # test-case 3 passed
-# NumOfSamples,index,value=pre.readFile("Task8\FIR test cases\Testcase 3\Filter Specifications.txt")
-# indx,filtered = task8.filter(value,"high-pass",8000,500,70,fc=1500)
+# indx,filtered = task8.filter("high-pass",8000,500,70,fc=1500)
 # Compare_Signals("Task8\FIR test cases\Testcase 3\HPFCoefficients.txt",indx,filtered)
 
 
 # test-case 4 
 # NumOfSamples,index,value=pre.readFile("Task8\FIR test cases\Testcase 3\Filter Specifications.txt")
-# indx,filtered = task8.filter(value,"high-pass",8000,500,70,fc=1500)
+# indx,filtered = task8.filter("high-pass",8000,500,70,fc=1500)
 # Compare_Signals("Task8\FIR test cases\Testcase 3\HPFCoefficients.txt",indx,filtered)
 
 
 # test-case 5 passed
-# NumOfSamples,index,value=pre.readFile("Task8\FIR test cases\Testcase 5\Filter Specifications.txt")
-# indx,filtered = task8.filter(value,"band-pass",1000,50,60,f1=150,f2=250)
+# indx,filtered = task8.filter("band-pass",1000,50,60,f1=150,f2=250)
 # Compare_Signals("Task8\FIR test cases\Testcase 5\BPFCoefficients.txt",indx,filtered)
 
 
 # test-case 6
 # NumOfSamples,index,value=pre.readFile("Task8\FIR test cases\Testcase 5\Filter Specifications.txt")
-# indx,filtered = task8.filter(value,"band-pass",1000,50,60,f1=150,f2=250)
+# indx,filtered = task8.filter("band-pass",1000,50,60,f1=150,f2=250)
 # Compare_Signals("Task8\FIR test cases\Testcase 5\BPFCoefficients.txt",indx,filtered)
 
 
 # test-case 7 passed
-# NumOfSamples,index,value=pre.readFile("Task8\FIR test cases\Testcase 7\Filter Specifications.txt")
-# indx,filtered = task8.filter(value,"band-stop",1000,50,60,f1=150,f2=250)
+# indx,filtered = task8.filter("band-stop",1000,50,60,f1=150,f2=250)
 # Compare_Signals("Task8\FIR test cases\Testcase 7\BSFCoefficients.txt",indx,filtered)
 
 # test-case 8 
 # NumOfSamples,index,value=pre.readFile("Task8\FIR test cases\Testcase 7\Filter Specifications.txt")
-# indx,filtered = task8.filter(value,"band-stop",1000,50,60,f1=150,f2=250)
+# indx,filtered = task8.filter("band-stop",1000,50,60,f1=150,f2=250)
 # Compare_Signals("Task8\FIR test cases\Testcase 7\BSFCoefficients.txt",indx,filtered)
 

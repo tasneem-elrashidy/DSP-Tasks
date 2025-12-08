@@ -3,11 +3,8 @@ from Logic import pre
 import math
 from Task7 import task7
 
-def filter(values,type,fs,Δf,attenution,fc=None,f1=None,f2=None):
+def filter(type,fs,Δf,attenution,fc=None,f1=None,f2=None):
     Δf2=Δf/fs
-    # values= np.array(values, dtype=float)
-    values = [v for v in values if isinstance(v, (int, float)) or str(v).replace('.','',1).isdigit()]
-
     if(attenution<=21):   # Rectangular
         N = math.ceil(0.9 / Δf2) # round for the nearest integer then if even make odd
         win = np.ones # window function
