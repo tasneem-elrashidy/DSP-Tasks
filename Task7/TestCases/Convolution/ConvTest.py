@@ -1,3 +1,6 @@
+from Task7 import task7
+
+
 def ConvTest(Your_indices,Your_samples): 
     """
     Test inputs
@@ -26,3 +29,11 @@ def ConvTest(Your_indices,Your_samples):
             print("Conv Test case failed, your signal have different values from the expected one") 
             return
     print("Conv Test case passed successfully")
+
+InputIndicesSignal1 =[-2,-1,0,1]
+InputSamplesSignal1 = [1,2,1,1]
+    
+InputIndicesSignal2=[0,1,2,3,4,5]
+InputSamplesSignal2 = [1,-1,0,0,1,1]
+resInd,resSp=task7.convolveSignals(InputIndicesSignal1,InputSamplesSignal1,InputIndicesSignal2,InputSamplesSignal2)
+ConvTest(resInd,resSp)

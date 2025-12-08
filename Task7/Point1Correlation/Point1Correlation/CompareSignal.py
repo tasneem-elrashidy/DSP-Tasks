@@ -1,3 +1,6 @@
+from Task7.task7 import  correlation, periodic_normalized_correlation
+
+
 def Compare_Signals(file_name,Your_indices,Your_samples):      
     expected_indices=[]
     expected_samples=[]
@@ -35,3 +38,10 @@ def Compare_Signals(file_name,Your_indices,Your_samples):
             print("Correlation Test case failed, your signal have different values from the expected one") 
             return
     print("Correlation Test case passed successfully")
+
+res_idx, res_smp = correlation(r"Task7\Point1Correlation\Point1Correlation\Corr_input signal1.txt"
+,r"Task7\Point1Correlation\Point1Correlation\Corr_input signal2.txt")
+Compare_Signals(r"Task7\Point1Correlation\Point1Correlation\CorrOutput.txt",res_idx,res_smp)
+
+res_idx, res_smp=periodic_normalized_correlation(r"Task7\Correlation(different length)\Correlation (different length)\Corr_input signal1.txt",r"Task7\Correlation(different length)\Correlation (different length)\Corr_input signal2.txt")
+Compare_Signals(r"Task7\Correlation(different length)\Correlation (different length)\CorrOutput.txt", res_idx, res_smp)
