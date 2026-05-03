@@ -66,24 +66,26 @@ class oprations:
     # out=acc(val1)
     # print(out)
 
-    def normZeroOne(sig1=None,values=None):
+    def normZeroOne(sig1=None, values=None):
         out = []
         indx = []
         if values is not None:
            val = np.array(values, dtype=float)
-        if sig1 is not None:  
-           N,indx,val = pre.readFile(sig1) 
-        val = np.array(val, dtype=float)     
-        out=[]
-        minval=val.min()
-        maxval=val.max()
-        rang=maxval-minval
-        
-        for i in range(len(val)):
-             out.append(((val[i])-minval)/(rang))
-        return indx,out
-    # out=norm(val2)
-    # print(out)
+        if sig1 is not None:
+            N, indx, val = pre.readFile(sig1)
+    # Convert indices to integers
+        indx = [int(x) for x in indx]
+        val = np.array(val, dtype=float)
+
+        minval = val.min()
+        maxval = val.max()
+        rang = maxval - minval
+        if rang == 0:  # handle constant signals
+            out = [0.0] * len(val)
+        else:
+            out = [(v - minval) / rang for v in val]
+
+        return indx, out
 
     def normOneToOne(sig1):
         indx,val = pre.readFile(sig1)
@@ -212,8 +214,8 @@ class oprations:
             L1 = value[::2]  # even indices
             L2 = value[1::2]  # odd indices
 
-            index, originalSignal, amplitued, phases, fft_1 = oprations.FFT_IFFT("FFT", L1)
-            index, originalSignal, amplitued, phases, fft_2 = oprations.FFT_IFFT("FFT", L2)
+            index, originalSignal, amplitued, phases, fft_1 = oprations.FFT_IFFT("FFT", value=L1)
+            index, originalSignal, amplitued, phases, fft_2 = oprations.FFT_IFFT("FFT",value= L2)
 
             
             factor = np.exp(-1j * 2 * np.pi * np.arange(N // 2) / N)

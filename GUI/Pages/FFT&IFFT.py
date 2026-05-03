@@ -26,9 +26,10 @@ with st.form(key="FD_Form"):
             # st.snow()
             if choice == "FFT":
                 NumOfSamples,indx,value=pre.readFile(file)
-                indx, originalsig, amp, phase,X = signalOperations.oprations.FFT_IFFT(choice, value=value)
+                indx, originalsig, amp, phase,X = signalOperations.oprations.FFT_IFFT("FFT", value=value)
             else: 
-                indx, originalsig, amp, phase,X = signalOperations.oprations.FFT_IFFT(choice, signal=file)
+                # NumOfSamples,amp,phase=pre.readFile(file)
+                indx, originalsig, amp, phase,X = signalOperations.oprations.FFT_IFFT("IFFT",signal=file)
 
 
             # Modify amplitude & phase if values provided
@@ -83,19 +84,19 @@ with st.form(key="FD_Form"):
                 )
                 st.plotly_chart(fig3)
             
-with st.form(key="DC_Form"):
-    st.subheader("Remove DC Component")
-    file = st.file_uploader("Upload a Signal File", type=["txt"], key="dc_file")
-    sub = st.form_submit_button(label="Remove DC")
+# with st.form(key="DC_Form"):
+#     st.subheader("Remove DC Component")
+#     file = st.file_uploader("Upload a Signal File", type=["txt"], key="dc_file")
+#     sub = st.form_submit_button(label="Remove DC")
 
-    if sub:
-        if not file:
-            st.warning("Please upload a file.")
-        else:
-            result = functions.removeDC(file)
-            st.subheader("Signal After Removing DC Component:")
+#     if sub:
+#         if not file:
+#             st.warning("Please upload a file.")
+#         else:
+#             result = functions.removeDC(file)
+#             st.subheader("Signal After Removing DC Component:")
 
-            fig2 = go.Figure()
+#             fig2 = go.Figure()
             # fig2.add_trace(go.Scatter(x=result, y=indx, mode='lines+markers'))
             # fig2.update_layout(
             #      xaxis_title='index',
@@ -104,4 +105,4 @@ with st.form(key="DC_Form"):
             #  )
             
             # st.plotly_chart(fig2)
-            st.write(result)
+            # st.write(result)
